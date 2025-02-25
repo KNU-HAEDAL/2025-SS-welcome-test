@@ -1,10 +1,22 @@
 package java_test;
 
+import java.util.Scanner;
+
 public class b {
     public static void main(String[] args) {
-
-        // 이 부분에 code를 작성해주세요!
-
+        Scanner scanner = new Scanner(System.in);
+        String word = scanner.nextLine().toLowerCase();
+        String vowels = "aeiou";
+        
+        boolean hasVowel = false;
+        for (char c : word.toCharArray()) {
+            if (vowels.indexOf(c) != -1) {
+                hasVowel = true;
+                break;
+            }
+        }
+        
+        System.out.println(hasVowel ? "O" : "X");
+        scanner.close();
     }
-
 }
