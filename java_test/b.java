@@ -1,10 +1,18 @@
 package java_test;
+import java.util.*;
 
 public class b {
     public static void main(String[] args) {
-
-        // 이 부분에 code를 작성해주세요!
-
+    	Scanner sc=new Scanner(System.in);
+    	String str=sc.nextLine();
+    	String[] arr= {"a", "e", "i", "o", "u"};
+    	
+    	for(String s : arr) {
+    		if(str.contains(s)) {
+    			System.out.println("O");
+    			System.exit(0);
+    		}
+    	}
+    	System.out.println("X");
     }
-
 }
