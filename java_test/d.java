@@ -1,10 +1,17 @@
 package java_test;
+import java.util.*;
 
 public class d {
     public static void main(String[] args) {
-
-        // 이 부분에 code를 작성해주세요!
-
+    	Scanner sc=new Scanner(System.in);
+    	while(true) {
+    		int num=sc.nextInt();
+    		if(num<=0) {
+    			System.out.println("X");
+    			break;
+    		}
+    		System.out.println(num*(num+1)/2);
+    		break;
+    	}
     }
-
 }
