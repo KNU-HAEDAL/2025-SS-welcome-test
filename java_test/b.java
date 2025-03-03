@@ -1,10 +1,25 @@
 package java_test;
+import java.util.Scanner;
 
 public class b {
     public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        String[] arr = {"a", "e", "i", "o", "u"};
+        boolean check = false;
 
-        // 이 부분에 code를 작성해주세요!
+        String str = sc.nextLine();
 
+        for(int i = 0; i < arr.length; i++)
+        {
+            if(str.contains(arr[i]))
+            {
+                check = true;
+                break;
+            }
+        }
+        
+        System.out.printf("%c\n",check? 'O':'X');
+        sc.close();
     }
 
 }
