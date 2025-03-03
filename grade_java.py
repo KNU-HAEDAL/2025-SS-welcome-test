@@ -104,21 +104,21 @@ def check(problem: str) -> dict[int, tuple[bool, str]]:
         
         # 파일 끝까지 읽어서 한 문장으로 만들기
         try:
-            f = open(input_txt)
+            f = open(input_txt, encoding='utf-8')
             input_data = f.read()
         except FileNotFoundError:
             raise FileNotFoundError(f"입력 파일이 존재하지 않습니다.: {problem}/input{number}.txt")
 
         expected_output = []
         try:
-            f = open(output_txt)
+            f = open(output_txt, encoding='utf-8')
             for line in f:
                 expected_output.append(line.rstrip())
         except FileNotFoundError:
             raise FileNotFoundError(f"출력 파일이 존재하지 않습니다.: {problem}/output{number}.txt")
         
         try:
-            f = open(java_file)
+            f = open(java_file, encoding='utf-8')
         except FileNotFoundError:
             raise FileNotFoundError(f"Java 파일이 존재하지 않습니다.: {problem}.java")
 

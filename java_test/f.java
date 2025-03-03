@@ -1,12 +1,33 @@
 package java_test;
 
-// 이부분에 class 선언 해도 괜찮습니다
+import java.util.Scanner;
 
 public class f {
     public static void main(String[] args) {
 
-        // 이 부분에 code를 작성해주세요!
+        Scanner input = new Scanner(System.in);
+        int N = input.nextInt();
 
+        for (int i = 1; i <= N; i++) {
+            for (int j = 0; j < N - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < 2 * i - 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+
+        for (int i = N - 1; i >= 1; i--) {
+            for (int j = 0; j < N - i; j++) {
+                System.out.print(" ");
+            }
+            for (int j = 0; j < 2 * i - 1; j++) {
+                System.out.print("*");
+            }
+            System.out.println();
+        }
+        input.close();
     }
 
 }
