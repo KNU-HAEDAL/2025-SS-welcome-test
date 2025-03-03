@@ -1,12 +1,133 @@
 package java_test;
 
-// ì´ë¶€ë¶„ì— class ì„ ì–¸ í•´ë„ ê´œì°®ìŠµë‹ˆë‹¤
+import java.util.Scanner;
 
-public class g2 {
-    public static void main(String[] args) {
+class Book {
+    protected String title;
+    protected int price;
+    protected double rating;
 
-        // ì´ ë¶€ë¶„ì— codeë¥¼ ì‘ì„±í•´ì£¼ì„¸ìš”!
-
+    public Book(String title, int price, double rating) {
+        this.title = title;
+        this.price = price;
+        this.rating = rating;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public double getRating() {
+        return rating;
+    }
+
+    public void printDetails() {
+        System.out.println("Title: " + title);
+        System.out.println("Price: " + price);
+        System.out.println("Rating: " + rating);
+    }
+}
+
+class EBook extends Book {
+    private int fileSize;
+
+    public EBook(String title, int price, double rating, int fileSize) {
+        super(title, price, rating);
+        this.fileSize = fileSize;
+    }
+
+    @Override
+    public void printDetails() {
+        super.printDetails();
+        System.out.println("ÆÄÀÏ Å©±â: " + fileSize + "MB");
+    }
+}
+
+class PrintedBook extends Book {
+    private int pageCount;
+
+    public PrintedBook(String title, int price, double rating, int pageCount) {
+        super(title, price, rating);
+        this.pageCount = pageCount;
+    }
+
+    @Override
+    public void printDetails() {
+        super.printDetails();
+        System.out.println("Page Count: " + pageCount );
+    }
+}
+
+public class g2 {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        Book[] books = new Book[3];
+        int bookCount = 0;
+
+        while (bookCount < 3) {
+            try {
+                System.out.print("Ã¥ Á¾·ù(EBook ¶Ç´Â PrintedBook): ");
+                String bookType = scanner.nextLine().trim();
+
+                // Ã¥ Á¾·ù°¡ À¯È¿ÇÑÁö È®ÀÎ
+                if (!(bookType.equals("EBook") || bookType.equals("PrintedBook"))) {
+                    throw new IllegalArgumentException("Invalid book type. Please enter 'EBook' or 'PrintedBook'.");
+                }
+
+                System.out.print("Á¦¸ñ: ");
+                String title = scanner.nextLine().trim();
+
+                // °¡°İ ÀÔ·Â Ã³¸®
+                System.out.print("°¡°İ: ");
+                int price = Integer.parseInt(scanner.nextLine().trim());
+                if (price <= 0) {
+                    throw new IllegalArgumentException("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. °¡°İÀº 1 ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+                }
+
+                // ÆòÁ¡ ÀÔ·Â Ã³¸®
+                System.out.print("ÆòÁ¡: ");
+                double rating = Double.parseDouble(scanner.nextLine().trim());
+                if (rating < 0 || rating > 5) {
+                    throw new IllegalArgumentException("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. ÆòÁ¡Àº 0°ú 5.0 »çÀÌ¿©¾ß ÇÕ´Ï´Ù.");
+                }
+
+                // Ãß°¡ Á¤º¸ ÀÔ·Â Ã³¸®
+                System.out.print("Ãß°¡ Á¤º¸: ");
+                int additionalInfo = Integer.parseInt(scanner.nextLine().trim());
+                if (additionalInfo <= 0) {
+                    throw new IllegalArgumentException("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. Ãß°¡ Á¤º¸´Â 1 ÀÌ»óÀÌ¾î¾ß ÇÕ´Ï´Ù.");
+                }
+
+                if (bookType.equals("EBook")) {
+                    books[bookCount] = new EBook(title, price, rating, additionalInfo);
+                } else {
+                    books[bookCount] = new PrintedBook(title, price, rating, additionalInfo);
+                }
+
+                bookCount++;
+            } catch (NumberFormatException e) {
+                System.out.println("Àß¸øµÈ ÀÔ·ÂÀÔ´Ï´Ù. Ã³À½ºÎÅÍ ´Ù½Ã ÀÔ·ÂÇÏ¼¼¿ä.");
+            } catch (IllegalArgumentException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+
+        // ÆòÁ¡ÀÌ °¡Àå ³ôÀº Ã¥À» Ã£±â
+        Book highestRatedBook = books[0];
+        for (int i = 1; i < books.length; i++) {
+            if (books[i].getRating() > highestRatedBook.getRating()) {
+                highestRatedBook = books[i];
+            }
+        }
+
+        // °¡Àå ³ôÀº ÆòÁ¡ÀÇ Ã¥ Á¤º¸ Ãâ·Â
+        System.out.println("\nHighest rated book information:");
+        highestRatedBook.printDetails();
+        scanner.close();
+    }
 }
