@@ -10,9 +10,8 @@ public class a {
 
         num = input.nextInt();
 
-        while (true) {
-            if(num == 0) break;
-
+        while (num != 0) {
+        
             tmp = num % 10;
             num = num / 10;
             System.out.print(tmp);
